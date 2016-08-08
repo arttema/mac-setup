@@ -23,8 +23,14 @@ brew install sbt
 brew tap pivotal/tap
 brew install springboot
 
-#js
-brew install npm
+#node
+rm -rf /usr/local/lib/node_modules
+brew uninstall node
+brew install node --without-npm
+echo prefix=~/.npm-packages >> ~/.npmrc
+curl -L https://www.npmjs.com/install.sh | sh
+export PATH="$HOME/.node/bin:$PATH"
+
 brew install bower
 brew install bower
 
