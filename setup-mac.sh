@@ -15,14 +15,32 @@ brew install git-flow
 brew install wget
 echo "Installing brew packages"
 
+installJavaEnv
+installScaleEnv
+installJSCommon
+installReactNative
+installCaskApps
+installDevOps
+installDatabases
+installTools
+
 #all things java
+function installJavaEnv {
+brew cask install java
 brew install maven
-brew install mongodb
-brew install scala
-brew install sbt
 brew tap pivotal/tap
 brew install springboot
+brew install gradle
+}
 
+
+function installScaleEnv {
+brew install scala
+brew install sbt
+brew install typesafe-activator
+}
+
+function installJSCommon {
 #node
 rm -rf /usr/local/lib/node_modules
 brew uninstall node
@@ -30,17 +48,19 @@ brew install node --without-npm
 echo prefix=~/.npm-packages >> ~/.npmrc
 curl -L https://www.npmjs.com/install.sh | sh
 export PATH="$HOME/.node/bin:$PATH"
+brew install bower
 
-brew install bower
-brew install bower
+}
+
+function installReactNative {
+brew install watchman
+}
 
 echo "Now Installing casks"
 brew cask install virtualbox
-brew cask install java
-
-
 
 #native apps
+function installCaskApps{
 brew cask install dropbox
 brew cask install evernote
 brew cask install google-chrome
@@ -55,11 +75,34 @@ brew cask install skype
 brew cask install viber
 brew cask install robomongo
 brew cask install vlc
-brew cask install flash
+#brew cask install flash
 brew cask install appcleaner
 brew cask install sublimetext
+}
+
+function installDevOps {
+brew install heroku-toolbelt
+brew install ec2-api-tools
+brew install awscli
+
+}
+
+function installDatabases {
+brew install postgresql
+brew install mongodb
+}
+
+function installTools {
+brew install rbenv
+brew install gdk-pixbuf
+brew install imagemagick
+brew install python
+brew install jbig2dec
+brew install rbenv
+brew install wget
+}
+
 
 echo "set up default mac plain-text viewer. Makes ALL text files to be opened in Sublime"
 defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add \
 '{LSHandlerContentType=public.plain-text;LSHandlerRoleAll=com.sublimetext.3;}'
-
