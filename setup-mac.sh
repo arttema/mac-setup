@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 if ! command -v brew >/dev/null; then
   echo "Installing Homebrew ..."
     curl -fsS \
@@ -13,12 +14,14 @@ brew update && brew upgrade brew-cask && brew cleanup && brew cask cleanup
 rew install git
 brew install git-flow
 brew install wget
+brew tap beeftornado/rmtree && brew install brew-rmtree
 echo "Installing brew packages"
 
 installJavaEnv
 installScaleEnv
 installJSCommon
 installReactNative
+installAndroid
 installCaskApps
 installDevOps
 installDatabases
@@ -50,10 +53,22 @@ curl -L https://www.npmjs.com/install.sh | sh
 export PATH="$HOME/.node/bin:$PATH"
 brew install bower
 
+sudo npm install -g eslint
+sudo npm install -g eslint-config-react-app@0.2.1 eslint@3.5.0 babel-eslint@6.1.2 eslint-plugin-react@6.3.0 eslint-plugin-import@1.12.0 eslint-plugin-jsx-a11y@2.2.2 eslint-plugin-flowtype@2.18.1
 }
 
 function installReactNative {
 brew install watchman
+sudo npm install -g react-native-cli
+#Mobile App icon resizing
+brew install imagemagick && sudo npm i -g ticons
+}
+
+function installAndroid {
+brew install android-sdk
+echo "export ANDROID_HOME=/usr/local/opt/android-sdk" >> ~/.bash_profile
+echo "enabling gradle incremental build Daemon"
+touch ~/.gradle/gradle.properties && echo "org.gradle.daemon=true" >> ~/.gradle/gradle.properties
 }
 
 echo "Now Installing casks"
